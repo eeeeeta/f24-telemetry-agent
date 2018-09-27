@@ -89,6 +89,7 @@ impl TelemetryAgent {
     }
 }
 fn main() {
+    env_logger::init();
     info!("[+] F24 Telemetry Agent");
     info!("[+] Reading configuration");
     let config = std::env::args().nth(1).expect("Config file should be first argument");
