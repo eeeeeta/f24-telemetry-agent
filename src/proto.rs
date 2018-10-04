@@ -31,5 +31,15 @@ pub struct UploadBody {
     pub rpm1: Option<f32>,
     #[serde(default)]
     pub rpm2: Option<f32>,
+    #[serde(default)]
+    pub motor_voltage: Option<f32>,
+    #[serde(default)]
+    pub motor_current: Option<f32>,
+    #[serde(default)]
+    pub gps_track: Option<f32>,
+    #[serde(default)]
+    pub battery_voltage_1: Option<f32>,
+    #[serde(default)]
+    pub battery_voltage_2: Option<f32>,
 }
 

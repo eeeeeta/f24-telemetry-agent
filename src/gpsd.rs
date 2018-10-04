@@ -25,8 +25,8 @@ impl GpsdHandler {
             match resp {
                 Response::Tpv(tpv) => {
                     match tpv {
-                        TpvResponse::Fix3D { time, lat, lon, speed, .. } |
-                        TpvResponse::Fix2D { time, lat, lon, speed, .. } => {
+                        TpvResponse::Fix3D { time, lat, lon, speed, track, .. } |
+                        TpvResponse::Fix2D { time, lat, lon, speed, track, .. } => {
                             let ts = time.timestamp() as u64;
                             info!("[G] Got new GPS TPV response, ts: {}", ts);
                             let body = UploadBody {
@@ -34,6 +34,7 @@ impl GpsdHandler {
                                 gps_speed: Some(speed as _),
                                 gps_long: Some(lon as _),
                                 gps_lat: Some(lat as _),
+                                gps_track: track.map(|x| x as _),
                                 ..Default::default()
                             };
                             self.tx.unbounded_send(body)
